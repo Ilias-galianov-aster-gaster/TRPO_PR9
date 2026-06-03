@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Гостевая книга</title>
+</head>
+<body>
+    <h1>📖 Гостевая книга</h1>
+    
+    <h2>Сообщения</h2>
+    {% if messages %}
+        {% for msg in messages %}
+        <div>
+            <strong>{{ msg.name }}</strong> ({{ msg.created_at }})
+            <p>{{ msg.message }}</p>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>Пока нет сообщений.</p>
+    {% endif %}
+</body>
+</html>
