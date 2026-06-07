@@ -2,20 +2,44 @@
 <html>
 <head>
     <title>Гостевая книга</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>📖 Гостевая книга</h1>
-    
-    <h2>Сообщения</h2>
-    {% if messages %}
-        {% for msg in messages %}
-        <div>
-            <strong>{{ msg.name }}</strong> ({{ msg.created_at }})
-            <p>{{ msg.message }}</p>
+    <div class="container">
+        {% if session.pop('success', False) %}
+            <div class="success-message">✅ сообщение успешно добавлено</div>
+        {% endif %}
+        
+        <h1>📖 Гостевая книга</h1>
+        
+        <h2>Сообщения</h2>
+        
+        {% if messages %}
+            {% for msg in messages %}
+            <div class="message {% if loop.index0 % 2 == 0 %}message-even{% else %}message-odd{% endif %}">
+                <strong>👤 {{ msg.name }}</strong> <small>(📅 {{ msg.created_at }})</small>
+                <p>{{ msg.message }}</p>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>Пока нет сообщений. Будьте первым!</p>
+        {% endif %}
+        
+                <div class="add-form">
+            <h2>Оставить сообщение</h2>
+            
+            <!-- Показываем текст ошибки, если она есть -->
+            {% if error %}
+                <p style="color: red; font-weight: bold;">⚠️ Пожалуйста, заполните все поля!</p>
+            {% endif %}
+
+            <form method="POST" action="/add">
+                <!-- Добавляем класс input-error, если есть ошибка -->
+                <input type="text" name="name" placeholder="Ваше имя" required class="{% if error %}input-error{% endif %}">
+                <textarea name="message" placeholder="Ваше сообщение" rows="4" required class="{% if error %}input-error{% endif %}"></textarea>
+                <button type="submit">✉️ Отправить</button>
+            </form>
         </div>
-        {% endfor %}
-    {% else %}
-        <p>Пока нет сообщений.</p>
-    {% endif %}
+    </div>
 </body>
 </html>
