@@ -7,17 +7,29 @@
 <body>
     <div class="container">
         {% if session.pop('success', False) %}
-            <div class="success-message">✅ сообщение успешно добавлено</div>
+            <div class="success-message">✅ Сообщение успешно добавлено</div>
         {% endif %}
         
         <h1>📖 Гостевая книга</h1>
         
+        <!-- Задание 6: Счётчик сообщений -->
+        <p class="counter">Всего сообщений: {{ total_count }}</p>
+        
+        <!-- Задание А: Ссылки для сортировки -->
+        <p style="text-align: center; margin-bottom: 20px;">
+            <a href="/sort/newest" style="text-decoration: none; color: #007bff;">📅 Сначала новые</a> | 
+            <a href="/sort/oldest" style="text-decoration: none; color: #007bff;">📅 Сначала старые</a>
+        </p>
+
         <h2>Сообщения</h2>
         
         {% if messages %}
             {% for msg in messages %}
-            <div class="message {% if loop.index0 % 2 == 0 %}message-even{% else %}message-odd{% endif %}">
-                <strong>👤 {{ msg.name }}</strong> <small>(📅 {{ msg.created_at }})</small>
+            <!-- Задание Б: Добавлен класс fresh, если сообщение сегодняшнее -->
+            <div class="message {% if msg.is_fresh %}fresh{% endif %} {% if loop.index0 % 2 == 0 %}message-even{% else %}message-odd{% endif %}">
+                <strong>👤 {{ msg.name }}</strong> <small>(📅 {{ msg.created_at_ru }})</small>
+                <!-- Задания 3 и 4: Кнопка удаления с подтверждением -->
+                <a href="/delete/{{ msg.id }}" class="delete-btn" onclick="return confirm('Удалить сообщение?')">Удалить</a>
                 <p>{{ msg.message }}</p>
             </div>
             {% endfor %}
@@ -25,20 +37,23 @@
             <p>Пока нет сообщений. Будьте первым!</p>
         {% endif %}
         
-                <div class="add-form">
+        <div class="add-form">
             <h2>Оставить сообщение</h2>
             
-            <!-- Показываем текст ошибки, если она есть -->
             {% if error %}
                 <p style="color: red; font-weight: bold;">⚠️ Пожалуйста, заполните все поля!</p>
             {% endif %}
 
             <form method="POST" action="/add">
-                <!-- Добавляем класс input-error, если есть ошибка -->
                 <input type="text" name="name" placeholder="Ваше имя" required class="{% if error %}input-error{% endif %}">
                 <textarea name="message" placeholder="Ваше сообщение" rows="4" required class="{% if error %}input-error{% endif %}"></textarea>
                 <button type="submit">✉️ Отправить</button>
             </form>
+        </div>
+
+        <!-- Задание В: Ссылка на удаление всех сообщений -->
+        <div style="text-align: center; margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px;">
+            <a href="/delete-all" style="color: red; text-decoration: underline;">🗑️ Удалить все сообщения</a>
         </div>
     </div>
 </body>
