@@ -24,7 +24,6 @@ h1 {
     padding: 10px 0;
 }
 
-/* Задание Б: Жёлтый фон для свежих сообщений */
 .fresh {
     background-color: #fff3cd !important;
     border-left: 4px solid #ffc107;
@@ -105,4 +104,21 @@ button:hover {
     border-radius: 5px;
     margin-bottom: 15px;
     text-align: center;
+}
+
+/* Стили для авторизации */
+.auth-links {
+    text-align: right;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
 }

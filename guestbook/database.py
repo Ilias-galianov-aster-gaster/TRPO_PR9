@@ -10,6 +10,7 @@ def get_db_connection():
 
 def init_db():
     conn = get_db_connection()
+    # Таблица сообщений
     conn.execute('''
         CREATE TABLE IF NOT EXISTS messages (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -18,6 +19,19 @@ def init_db():
             created_at DATE NOT NULL
         )
     ''')
+    # Таблица пользователей
+    conn.execute('''
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username TEXT NOT NULL UNIQUE,
+            password TEXT NOT NULL
+        )
+    ''')
+    # Добавляем администратора (если ещё нет)
+    conn.execute(
+        'INSERT OR IGNORE INTO users (username, password) VALUES (?, ?)',
+        ('admin', '123')
+    )
     conn.commit()
     conn.close()
 
@@ -37,14 +51,12 @@ def add_message(name, message):
     conn.close()
 
 def delete_message(message_id):
-    """Удаляет сообщение из базы данных по его id."""
     conn = get_db_connection()
     conn.execute('DELETE FROM messages WHERE id = ?', (message_id,))
     conn.commit()
     conn.close()
 
 def get_message_count():
-    """Возвращает общее количество сообщений."""
     conn = get_db_connection()
     cursor = conn.execute('SELECT COUNT(*) FROM messages')
     count = cursor.fetchone()[0]
@@ -52,8 +64,17 @@ def get_message_count():
     return count
 
 def delete_all_messages():
-    """Удаляет все сообщения из базы данных."""
     conn = get_db_connection()
     conn.execute('DELETE FROM messages')
     conn.commit()
     conn.close()
+
+def check_user(username, password):
+    """Проверяет существование пользователя с указанным логином и паролем."""
+    conn = get_db_connection()
+    user = conn.execute(
+        'SELECT * FROM users WHERE username = ? AND password = ?',
+        (username, password)
+    ).fetchone()
+    conn.close()
+    return user is not None

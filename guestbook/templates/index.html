@@ -12,10 +12,20 @@
         
         <h1>📖 Гостевая книга</h1>
         
-        <!-- Задание 6: Счётчик сообщений -->
+        <!-- Блок авторизации -->
+        <div class="auth-links">
+            {% if logged_in %}
+                Вы вошли как <strong>{{ username }}</strong> |
+                <a href="/logout">Выйти</a>
+            {% else %}
+                <a href="/login">Войти</a> (админ: admin / 123)
+            {% endif %}
+        </div>
+        
+        <!-- Счётчик -->
         <p class="counter">Всего сообщений: {{ total_count }}</p>
         
-        <!-- Задание А: Ссылки для сортировки -->
+        <!-- Сортировка -->
         <p style="text-align: center; margin-bottom: 20px;">
             <a href="/sort/newest" style="text-decoration: none; color: #007bff;">📅 Сначала новые</a> | 
             <a href="/sort/oldest" style="text-decoration: none; color: #007bff;">📅 Сначала старые</a>
@@ -25,11 +35,12 @@
         
         {% if messages %}
             {% for msg in messages %}
-            <!-- Задание Б: Добавлен класс fresh, если сообщение сегодняшнее -->
             <div class="message {% if msg.is_fresh %}fresh{% endif %} {% if loop.index0 % 2 == 0 %}message-even{% else %}message-odd{% endif %}">
                 <strong>👤 {{ msg.name }}</strong> <small>(📅 {{ msg.created_at_ru }})</small>
-                <!-- Задания 3 и 4: Кнопка удаления с подтверждением -->
-                <a href="/delete/{{ msg.id }}" class="delete-btn" onclick="return confirm('Удалить сообщение?')">Удалить</a>
+                <!-- Кнопка удаления видна только авторизованным -->
+                {% if logged_in %}
+                    <a href="/delete/{{ msg.id }}" class="delete-btn" onclick="return confirm('Удалить сообщение?')">Удалить</a>
+                {% endif %}
                 <p>{{ msg.message }}</p>
             </div>
             {% endfor %}
@@ -37,13 +48,12 @@
             <p>Пока нет сообщений. Будьте первым!</p>
         {% endif %}
         
+        <!-- Форма добавления -->
         <div class="add-form">
             <h2>Оставить сообщение</h2>
-            
             {% if error %}
                 <p style="color: red; font-weight: bold;">⚠️ Пожалуйста, заполните все поля!</p>
             {% endif %}
-
             <form method="POST" action="/add">
                 <input type="text" name="name" placeholder="Ваше имя" required class="{% if error %}input-error{% endif %}">
                 <textarea name="message" placeholder="Ваше сообщение" rows="4" required class="{% if error %}input-error{% endif %}"></textarea>
@@ -51,7 +61,7 @@
             </form>
         </div>
 
-        <!-- Задание В: Ссылка на удаление всех сообщений -->
+        <!-- Удаление всех -->
         <div style="text-align: center; margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px;">
             <a href="/delete-all" style="color: red; text-decoration: underline;">🗑️ Удалить все сообщения</a>
         </div>
