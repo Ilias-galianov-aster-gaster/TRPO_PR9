@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap песочница</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons (для задания 4) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <!-- Небольшие собственные стили (для красоты) -->
+    <style>
+        body { padding-bottom: 2rem; }
+        .section-title { margin-top: 2.5rem; margin-bottom: 1rem; border-bottom: 2px solid #dee2e6; padding-bottom: 0.5rem; }
+        .card-img-top { height: 150px; object-fit: cover; background: #f8f9fa; }
+        .table-example td, .table-example th { text-align: center; }
+    </style>
+</head>
+<body>
+
+<!-- ====== Шаг 7. НАВИГАЦИОННАЯ ПАНЕЛЬ ====== -->
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#"><i class="bi bi-house-fill me-2"></i>Мой сайт</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link active" href="#">Главная</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">О нас</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Контакты</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-4">
+
+    <!-- ====== Шаг 2. ЗАГОЛОВОК ====== -->
+    <h1 class="display-5">Моя первая Bootstrap страница</h1>
+    <p class="lead">Привет, мир! Здесь собраны все элементы из практической работы №13.</p>
+
+    <!-- ============================================================ -->
+    <!-- ====== Шаг 3. КНОПКИ ====== -->
+    <h2 class="section-title">Кнопки</h2>
+    <div>
+        <button class="btn btn-primary">Primary</button>
+        <button class="btn btn-secondary">Secondary</button>
+        <button class="btn btn-success">Success</button>
+        <button class="btn btn-danger">Danger</button>
+        <button class="btn btn-warning">Warning</button>
+        <button class="btn btn-info">Info</button>
+        <button class="btn btn-light">Light</button>
+        <button class="btn btn-dark">Dark</button>
+    </div>
+    <div class="mt-2">
+        <button class="btn btn-outline-primary">Outline Primary</button>
+        <button class="btn btn-outline-danger">Outline Danger</button>
+        <button class="btn btn-outline-success">Outline Success</button>
+    </div>
+    <div class="mt-2">
+        <button class="btn btn-primary btn-lg">Большая</button>
+        <button class="btn btn-primary">Обычная</button>
+        <button class="btn btn-primary btn-sm">Маленькая</button>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ====== ЗАДАНИЕ 1 – Карточка товара ====== -->
+    <h2 class="section-title">Карточка товара (задание 1)</h2>
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Смартфон X</h5>
+            <h6 class="card-subtitle text-muted">Модель 2025</h6>
+            <p class="card-text mt-2">Цена: <strong>49 990 ₽</strong></p>
+            <a href="#" class="btn btn-success"><i class="bi bi-cart-plus me-1"></i>Купить</a>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ====== Шаг 5. АДАПТИВНАЯ СЕТКА ====== -->
+    <h2 class="section-title">Адаптивная сетка (3 колонки)</h2>
+    <div class="row">
+        <div class="col-md-4"><div class="bg-light p-3 border text-center">Колонка 1</div></div>
+        <div class="col-md-4"><div class="bg-light p-3 border text-center">Колонка 2</div></div>
+        <div class="col-md-4"><div class="bg-light p-3 border text-center">Колонка 3</div></div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ====== Шаг 6. ФОРМА ОБРАТНОЙ СВЯЗИ ====== -->
+    <h2 class="section-title">Форма обратной связи</h2>
+    <form>
+        <div class="mb-3">
+            <label for="name" class="form-label">Имя</label>
+            <input type="text" class="form-control" id="name" placeholder="Введите имя">
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="name@example.com">
+        </div>
+        <div class="mb-3">
+            <label for="message" class="form-label">Сообщение</label>
+            <textarea class="form-control" id="message" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary"><i class="bi bi-send me-1"></i>Отправить</button>
+    </form>
+
+    <!-- ============================================================ -->
+    <!-- ====== ЗАДАНИЕ 2 – Таблица 3×3 ====== -->
+    <h2 class="section-title">Таблица 3×3 (задание 2)</h2>
+    <table class="table table-striped table-bordered table-example">
+        <thead class="table-dark">
+            <tr><th>Имя</th><th>Возраст</th><th>Город</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>Анна</td><td>25</td><td>Москва</td></tr>
+            <tr><td>Пётр</td><td>32</td><td>Санкт-Петербург</td></tr>
+            <tr><td>Елена</td><td>28</td><td>Казань</td></tr>
+        </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- ====== ЗАДАНИЕ 3 – Форма авторизации ====== -->
+    <h2 class="section-title">Форма авторизации (задание 3)</h2>
+    <div class="row">
+        <div class="col-md-6 col-lg-4">
+            <form>
+                <div class="mb-3">
+                    <label for="login" class="form-label">Логин</label>
+                    <input type="text" class="form-control" id="login" placeholder="Ваш логин">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Пароль</label>
+                    <input type="password" class="form-control" id="password" placeholder="Пароль">
+                </div>
+                <button type="submit" class="btn btn-primary"><i class="bi bi-box-arrow-in-right me-1"></i>Войти</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ====== ЗАДАНИЕ 5 – 4 карточки в ряд (с иконками) ====== -->
+    <h2 class="section-title">4 карточки в ряд (задание 5 + иконки)</h2>
+    <div class="row">
+        <!-- Карточка 1 -->
+        <div class="col-sm-6 col-md-3 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-phone display-1"></i>
+                    <h5 class="card-title mt-2">Смартфон</h5>
+                    <p class="card-text">От 29 990 ₽</p>
+                    <a href="#" class="btn btn-outline-primary"><i class="bi bi-cart"></i></a>
+                </div>
+            </div>
+        </div>
+        <!-- Карточка 2 -->
+        <div class="col-sm-6 col-md-3 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-laptop display-1"></i>
+                    <h5 class="card-title mt-2">Ноутбук</h5>
+                    <p class="card-text">От 59 990 ₽</p>
+                    <a href="#" class="btn btn-outline-primary"><i class="bi bi-cart"></i></a>
+                </div>
+            </div>
+        </div>
+        <!-- Карточка 3 -->
+        <div class="col-sm-6 col-md-3 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-headphones display-1"></i>
+                    <h5 class="card-title mt-2">Наушники</h5>
+                    <p class="card-text">От 4 990 ₽</p>
+                    <a href="#" class="btn btn-outline-primary"><i class="bi bi-cart"></i></a>
+                </div>
+            </div>
+        </div>
+        <!-- Карточка 4 -->
+        <div class="col-sm-6 col-md-3 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-watch display-1"></i>
+                    <h5 class="card-title mt-2">Умные часы</h5>
+                    <p class="card-text">От 12 990 ₽</p>
+                    <a href="#" class="btn btn-outline-primary"><i class="bi bi-cart"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div> <!-- /container -->
+
+<!-- Bootstrap JS (для работы навигационного меню на мобильных) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
